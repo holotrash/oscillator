@@ -95,16 +95,10 @@ int process(jack_nframes_t nframes, void *arg){
     jack_nframes_t i;
     
     midi_port_buffer = jack_port_get_buffer(midi_input_port, nframes);
-    //printf("number of events in the midi port buffer = %d", jack_midi_get_event_count(midi_port_buffer));
 
     for(i=0;i<jack_midi_get_event_count(midi_port_buffer);i++){
         if (!jack_midi_event_get(&currentMidiEvent, midi_port_buffer, i)){
             if(currentMidiEvent.size == 3){
-                
-                printf("buffer[0]=%c", currentMidiEvent.buffer[0]);
-                printf("buffer[1]=%c", currentMidiEvent.buffer[1]);
-                printf("buffer[2]=%c", currentMidiEvent.buffer[2]);
-
                 if(currentMidiEvent.buffer[0]==0x90){ //note on
                     addNote(currentMidiEvent.buffer[1]);
                 } else if (currentMidiEvent.buffer[0]==0x80){ //note off
