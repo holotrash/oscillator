@@ -141,7 +141,6 @@ int main(int argc, char* argv[])
 {
     gtk_init(&argc,&argv); // initialize gtk
 
-    //initialize global variables
     volume = 0.5;
     pressedNotes = malloc(sizeof(jack_midi_data_t)*128); 
     numPressedNotes = 0;
